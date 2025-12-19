@@ -1,0 +1,28 @@
+Data Source
+	- Property Assessment Data
+		Source: https://data.boston.gov/dataset/property-assessment?
+		The assessed values are generally lower than observed market sale prices.
+	- Parcels Data (2025)
+		Source：https://data.boston.gov/dataset/parcels-2025?
+		This dataset is used to compute geographic information, such as latitude and longitude.
+
+Data Selection
+	- The baseline model primarily uses housing features from Property Assessment FY2025, since newer assessment data contains a larger number of properties.
+	- In addition, assessment data from 2020 and 2022–2024 is used to compute price trends. FY2025 provides the most complete snapshot of current housing stock, while earlier years are used only to capture temporal trends, not as independent training targets.
+	- The project folder includes the training data schema used for the Baseline_Model.
+	- Please note that PID is not used as a model input, but is retained as a unique identifier during data processing.
+	- Also note that file names and file paths in the training code may differ depending on your local setup. Please adjust them accordingly.
+
+Data Processing Pipeline
+(1) Feature Selection and Cleaning
+	Select relevant features from the 2025 assessment data.
+	During processing, PID is preserved as the unique property identifier.
+	Data cleaning and normalization are applied, for example:
+	- Converting heterogeneous heating type strings into a unified numeric feature (heat_class). The resulting table is referred to as the main table.	
+(2) Geographic Feature Construction
+	Use GIS_ID to retrieve parcel geometries and compute centroid-based latitude and longitude.
+(3) Price Trend Computation
+	Compute 5-year and long-term price trends for each property and merge them into the main table.
+(4) Sanity Check
+	Perform sanity checks on the final main table to ensure data consistency and validity.
+

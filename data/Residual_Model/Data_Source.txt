@@ -1,0 +1,11 @@
+Data Source
+	- Mass land records
+		Source: https://www.masslandrecords.com/Suffolk/D/Default.aspx
+			Office: Recorded Land; Search Type: Recorded Data Search; Advanced: Dpcument Types: Deed; Towns: boston
+	
+You may collect the data using your own crawler. (I only collect the data from 2025/1/1 to 2025/12/15, if you could collet more, the residual model will perform better. )
+The corresponding script (massland_debug.py) is included in the project folder.
+
+The directory also contains the first 10 rows of cleaned valid sale records from 2025 for reference.
+These records are later matched with the main table or the government assessment table using street number and street name, in order to obtain a table containing sale price, sale date, and PID.
+These fields are then merged back into the main table and used to train the residual model.
